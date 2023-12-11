@@ -1,0 +1,6 @@
+# file
+*.pyc
+
+# dir
+.idea/
+__pycache__/
