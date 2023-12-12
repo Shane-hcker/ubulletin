@@ -3,13 +3,13 @@
     padding: 0;
 }
 
-@font-face {
-  font-family: "myFont";
-  src: url("myFont.woff2");
-}
+/*@font-face {*/
+/*  font-family: "myFont";*/
+/*  src: url("myFont.woff2");*/
+/*}*/
 
 .container {
-    margin-top: 100px;
+    margin-top: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,7 +24,7 @@
     align-items: center;
     justify-content: center;
     color: white;
-    font-family: "Toppan Bunkyu Midashi Gothic";
+    font-family: "Toppan Bunkyu Midashi Gothic" ;
 }
 
 .circle {
@@ -37,8 +37,6 @@
     border-radius: 50%;
     background-image: linear-gradient(0deg, rgb(41, 98, 161), rgb(56, 97, 156) 30%, rgb(36, 93, 117) 60%, rgb(66, 148, 145) 100%);
     animation: rotate 3s linear infinite;
-    color: white;
-    font-size: 16px;
 }
 
 .circle::before {
@@ -49,6 +47,7 @@
     border-radius: 50%;
     background-image: linear-gradient(0deg, rgb(41, 98, 161), rgb(56, 97, 156) 30%, rgb(36, 93, 117) 60%, rgb(66, 148, 145) 100%);
     filter: blur(35px);
+    -webkit-filter: blur(35px);
 }
 
 .circle::after {
@@ -57,7 +56,7 @@
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.75);
 }
 
 @keyframes rotate {
@@ -67,4 +66,49 @@
     100% {
         transform: rotate(360deg);
     }
+}
+
+.bg {
+    background-attachment: fixed;
+    background-image: url("../images/bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-filter: blur(15px);
+    filter: blur(15px);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    transform: scale(1.1);
+    width: 100%;
+    z-index: -1
+}
+
+header {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, .05);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .2);
+    padding: 10px 15px;
+    position: fixed;
+    top: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 100%
+}
+
+.tab {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+    font-family: "Toppan Bunkyu Midashi Gothic";
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.site-name {
+    border-right: white solid 1px;
+    border-collapse: collapse;
 }
