@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+  font-family: "myFont";
+  src: url("myFont.woff2");
+}
+
+.container {
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-title {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: "Toppan Bunkyu Midashi Gothic";
+}
+
+.circle {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-image: linear-gradient(0deg, rgb(41, 98, 161), rgb(56, 97, 156) 30%, rgb(36, 93, 117) 60%, rgb(66, 148, 145) 100%);
+    animation: rotate 3s linear infinite;
+    color: white;
+    font-size: 16px;
+}
+
+.circle::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-image: linear-gradient(0deg, rgb(41, 98, 161), rgb(56, 97, 156) 30%, rgb(36, 93, 117) 60%, rgb(66, 148, 145) 100%);
+    filter: blur(35px);
+}
+
+.circle::after {
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
