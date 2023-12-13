@@ -11,13 +11,23 @@
 <body>
   <div class="bg"></div>
   <header>
-    <div class="tab site-name">
-      UBulletin'
-    </div>
-    <a href="#">
-      <div class="tab">
+    <a href="#" class="tab site-name">
+      <div>
+        UBulletin'
+      </div>
+    </a>
+    <a href="#" class="tab">
+      <div>
         Home
       </div>
+    </a>
+    <a href="#" class="tab user-icon">
+      {% if current_user.is_authenticated %}
+      <div>
+        <img src="../static/images/defaultuser.png" style="filter: invert(1); vertical-align: middle; height: 24px">
+        Login
+      </div>
+      {% endif %}
     </a>
 
   </header>
