@@ -9,7 +9,7 @@ app = flask.Flask(__name__)
 from app.config import AppConfig
 
 app.config.from_object(AppConfig)
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 # login_manager = LoginManager(app)
 
 

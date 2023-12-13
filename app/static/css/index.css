@@ -12,13 +12,13 @@
 
 .page-title {
     position: absolute;
-    width: 150px;
-    height: 150px;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
+    font-size: 72px;
+    text-shadow: 7px 7px 10px rgba(0, 0, 0, .5);
     font-family: "Toppan Bunkyu Midashi Gothic" ;
 }
 

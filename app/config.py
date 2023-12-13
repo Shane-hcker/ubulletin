@@ -5,4 +5,5 @@ from sqlalchemy import URL
 
 
 class AppConfig(Config):
-    SQLALCHEMY_DATABASE_URI = URL.create(...)
+    # SQLALCHEMY_DATABASE_URI = URL.create(...)
+    pass
