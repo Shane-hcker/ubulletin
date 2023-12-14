@@ -6,44 +6,46 @@
   <meta name="viewport" content="width=device-width, user-scalable=no,
   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% if route == 'gif' %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gif.css') }}">
+  {% elif route == 'index' %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  {% endif %}
+
 </head>
 <body>
   <div class="bg"></div>
   <header>
     <a href="#" class="tab site-name">
       <div>
-        UBulletin'
+        <img src="../static/images/logo.png" style="height: 15px;">
+        Bulletin'
       </div>
     </a>
     <a href="#" class="tab">
       <div>
-        Home
+        <img src="../static/images/home.png" style="filter: invert(1); vertical-align: middle; height: 20px">
       </div>
     </a>
     <a href="#" class="tab right-tabs">
       <div>
-        <img src="../static/images/defaultuser.png" style="filter: invert(1); vertical-align: middle; height: 24px">
+        <img src="../static/images/defaultuser.png" style="filter: invert(1); vertical-align: middle; height: 20px">
         +
       </div>
     </a>
     <a href="#" class="tab right-tabs">
       <div>
-        <img src="../static/images/no_off.png" style="filter: invert(1); vertical-align: middle; height: 24px">
+        <img src="../static/images/no_off.png" style="filter: invert(1); vertical-align: middle; height: 20px">
       </div>
     </a>
     <a href="#" class="tab right-tabs">
       <div>
-        <img src="../static/images/no_on.png" style="filter: invert(1); vertical-align: middle; height: 24px">
+        <img src="../static/images/no_on.png" style="filter: invert(1); vertical-align: middle; height: 20px">
       </div>
     </a>
-
   </header>
-  <a href="">
-    <div class="container">
-      <div class="circle"></div>
-      <div class="page-title">GIF Forum.</div>
-    </div>
-  </a>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
 </body>
 </html>
