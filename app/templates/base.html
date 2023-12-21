@@ -6,46 +6,51 @@
   <meta name="viewport" content="width=device-width, user-scalable=no,
   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
   {% if route == 'gif' %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/gif.css') }}">
   {% elif route == 'index' %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  {% elif route == 'login' or route == 'signup' %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
   {% endif %}
-
 </head>
 <body>
   <div class="bg"></div>
   <header>
-    <a href="#" class="tab site-name">
+    <a href="{{ url_for('index') }}" class="tab site-name">
       <div>
         <img src="../static/images/logo.png" style="height: 15px;">
         Bulletin'
       </div>
     </a>
-    <a href="#" class="tab">
-      <div>
-        <img src="../static/images/home.png" style="filter: invert(1); vertical-align: middle; height: 20px">
+    <a href="{{ url_for('index') }}" class="tab">
+      <div class="tab-icon">
+        <img src="../static/images/home.png">
       </div>
     </a>
-    <a href="#" class="tab right-tabs">
-      <div>
-        <img src="../static/images/defaultuser.png" style="filter: invert(1); vertical-align: middle; height: 20px">
+    <a href="{{ url_for('gif') }}" class="tab">
+      <div class="tab-icon">
+        GIF
+      </div>
+    </a>
+    <a href="{{ url_for('login') }}" class="tab right-tabs">
+      <div class="tab-icon">
+        <img src="../static/images/defaultuser.png">
         +
       </div>
     </a>
     <a href="#" class="tab right-tabs">
-      <div>
-        <img src="../static/images/no_off.png" style="filter: invert(1); vertical-align: middle; height: 20px">
+      <div class="tab-icon">
+        <img src="../static/images/no_off.png">
       </div>
     </a>
     <a href="#" class="tab right-tabs">
-      <div>
-        <img src="../static/images/no_on.png" style="filter: invert(1); vertical-align: middle; height: 20px">
+      <div class="tab-icon">
+        <img src="../static/images/no_on.png">
       </div>
     </a>
   </header>
-  <main>
-    {% block content %}{% endblock %}
-  </main>
+  {% block content %}{% endblock %}
 </body>
 </html>
