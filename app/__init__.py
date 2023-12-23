@@ -10,7 +10,7 @@ from app.config import AppConfig
 
 app.config.from_object(AppConfig)
 db = SQLAlchemy(app)
-# login_manager = LoginManager(app)
+login_manager = LoginManager(app)
 
 
 from app import routes, models
