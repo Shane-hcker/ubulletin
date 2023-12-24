@@ -1,6 +1,6 @@
 # UBulletin' Demo
 
-## What is UBulletin'
+**A featured site in UWCCSC which aims at (hopefully) a more effective GIF discussion and charity advocation**
 
 
 
