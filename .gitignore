@@ -5,3 +5,4 @@
 # dir
 .idea/
 __pycache__/
+migrations/

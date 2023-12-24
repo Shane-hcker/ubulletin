@@ -21,7 +21,7 @@ class SaltPassword(str):
     @classmethod
     def wrap(cls, saltypassword: str) -> Self:
         """
-        wraps salty password with ``SaltyPassword``
+        wraps salt password with ``SaltPassword``
         :param saltypassword: saltypassword to wrap
         """
         return cls(saltypassword)
@@ -29,7 +29,7 @@ class SaltPassword(str):
     @classmethod
     def saltify(cls, original: str) -> Self:
         """
-        saltify a password with ``SaltyPassword()``
+        saltify a password with ``SaltPassword()``
         :param original: the original password
         """
         return cls(generate_password_hash(original))
@@ -39,7 +39,7 @@ class SaltVarChar(TypeDecorator):
     impl = VARCHAR
 
     def process_bind_param(self, value, dialect) -> Optional[str]:
-        return value
+        return SaltPassword.saltify(value)
 
     def process_result_value(self, value, dialect) -> SaltPassword:
         return SaltPassword(value)
