@@ -7,11 +7,6 @@ from app.models import *
 
 @app.shell_context_processor
 def relate_shell_context() -> Dict[str, Any]:
-    """
-    when executing shells under current pwd,
-    this func relates the shell context to db, app instances
-    |> flask shell
-    """
     return {
         'app': app,
         'db': db,

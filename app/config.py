@@ -11,7 +11,7 @@ def secret_key() -> str:
 
 
 class AppConfig(Config):
-    SECRET_KEY = os.environ.get('APP_SECRET_KEY') or secret_key()
+    SECRET_KEY = os.environ.get('FLASK_SECRET_KEY') or secret_key()
 
     # SQLAlchemy
     SQLALCHEMY_DATABASE_URI = URL.create('mysql+pymysql', host='localhost', port=3306,

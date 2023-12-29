@@ -1,4 +1,47 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <div class="container">
+    <div class="opt-container">
+      <button onclick="switchLogin(true)" id="login">
+        login
+      </button>
+      <button onclick="switchLogin(false)" id="signup">
+        register
+      </button>
+    </div>
+
+    <div class="signup-form">
+      <form action="" method=post novalidate>
+        {{ signup.hidden_tag() }}
+        <div>
+          {{ signup.email(placeholder='xxx@uwcchina.org...', class='input') }}
+        </div>
+        <div>
+          {{ signup.password(placeholder='password', class='input') }}
+        </div>
+        <div>
+          {{ signup.confirm_password(placeholder='confirm your password', class='input') }}
+        </div>
+        <div>
+          {{ signup.submit() }}
+        </div>
+      </form>
+    </div>
+
+    <div class="login-form">
+      <form action="" method=post novalidate>
+        {{ login.hidden_tag() }}
+        <div>
+          {{ login.email(placeholder='xxx@uwcchina.org...', class='input') }}
+        </div>
+        <div>
+          {{ login.password(placeholder='password', class='input') }}
+        </div>
+        <div>
+          {{ login.submit() }}
+        </div>
+      </form>
+    </div>
+  </div>
 {% endblock %}

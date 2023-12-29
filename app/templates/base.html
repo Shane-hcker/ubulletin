@@ -12,7 +12,7 @@
   {% elif route == 'index' %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
   {% elif route == 'login' or route == 'signup' %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
   {% endif %}
 </head>
 <body>
@@ -52,5 +52,8 @@
     </a>
   </header>
   {% block content %}{% endblock %}
+  {% if route == 'login' or route == 'signup' %}
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+  {% endif %}
 </body>
 </html>
