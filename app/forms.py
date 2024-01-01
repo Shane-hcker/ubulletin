@@ -4,6 +4,7 @@ from functools import wraps
 
 import sqlalchemy
 from sqlalchemy import and_
+from werkzeug.security import check_password_hash
 from flask_wtf import FlaskForm
 from wtforms import Field, StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, ValidationError
@@ -39,11 +40,19 @@ class LoginForm(FlaskForm):
         if not email.data.endswith('@uwcchina.org'):
             raise ValidationError(f'{email.data} is not a school email.')
 
+    def validate_password(self, password: Field):
+        print(self.password.data, self.email.data)
+        if not check_password_hash(User.get_user(
+           email=self.email.data).password, password.data):
+            raise ValidationError(f'Incorrect password for {self.email.data}')
 
-class SignupForm(LoginForm):
-    username = StringField(validators=[DataRequired(), Length(min=4, max=16)])
+
+class SignupForm(FlaskForm):
+    username = StringField(validators=[DataRequired(), Length(min=4, max=64)])
+    email = StringField(validators=[DataRequired(), Email(check_deliverability=True)])
+    password = PasswordField(validators=[DataRequired(), Length(min=8)])
     confirm_password = PasswordField(validators=[DataRequired(), Length(min=8)])
-    # remember = None
+    submit = SubmitField()
 
     @valid_char
     def validate_username(self, username):
@@ -51,11 +60,11 @@ class SignupForm(LoginForm):
     
     @valid_char
     def validate_email(self, email: Field):
-        super().validate_email(email)
-        if db.session.scalars(sqlalchemy.select(User).where(User.email == email.data)):
+        if not email.data.endswith('@uwcchina.org'):
+            raise ValidationError(f'{email.data} is not a school email.')
+        if User.get_user(email=email.data):
             raise ValidationError('This email has been registered.')
 
-    @valid_char
     def validate_confirm_password(self, confirm_password):
         if self.password.data != confirm_password.data:
             raise ValidationError('Unidentical Password Pair')

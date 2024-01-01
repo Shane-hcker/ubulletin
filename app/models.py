@@ -1,8 +1,10 @@
 # -*- encoding: utf-8 -*-
 from typing import *
 
+from werkzeug.security import check_password_hash
+from sqlalchemy import select, and_
 from sqlalchemy import Integer, VARCHAR, Text as sText
-from flask_login import UserMixin
+from flask_login import UserMixin, login_user
 from flask_wtf import FlaskForm
 
 from app import db, login_manager
@@ -27,6 +29,22 @@ class User(UserMixin, DBMixin, db.Model):
 
     post = db.relationship('Post', backref='user', lazy=True)
 
+    @staticmethod
+    def get_user(**kwargs) -> "User":
+        where = and_(
+            *[eval(f'User.{k} == \'{v}\'') for k, v in kwargs.items()]
+        )
+        query = select(User).where(where)
+        return db.session.scalar(query)
+
+    # @staticmethod
+    # def get_users(**kwargs) -> "User":
+    #     where = and_(
+    #         eval(f'User.{k} == \'{v}\'') for k, v in kwargs.items()
+    #     )
+    #     query = select(User).where(where)
+    #     return db.session.scalars(query)
+
     def to_dict(self) -> MutableMapping:
         return {
             'id': self.id,
@@ -44,7 +62,7 @@ class User(UserMixin, DBMixin, db.Model):
         return _new_user
 
     @classmethod
-    def from_form(cls, form: FlaskForm) -> "User":
+    def new_from_form(cls, form: FlaskForm) -> "User":
         _new_user = cls()
         _new_user.email = form.email.data
         _new_user.username = form.username.data

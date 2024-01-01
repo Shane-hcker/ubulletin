@@ -11,6 +11,10 @@ const m3 = (elem1, elem2, btn1, btn2) => {
 }
 
 const switchLogin = (bool) =>  {
-    !bool ? m3(loginDisplay, signupDisplay, signupButton, loginButton) :
-        m3(signupDisplay, loginDisplay, loginButton, signupButton)
+    if (!bool) {
+        document.title = 'Account - Signup'
+        return m3(loginDisplay, signupDisplay, signupButton, loginButton)
+    }
+    document.title = 'Account - Login'
+    return m3(signupDisplay, loginDisplay, loginButton, signupButton)
 }

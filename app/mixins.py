@@ -9,7 +9,7 @@ __all__ = ['DBMixin']
 
 
 class DBMixin:
-    def commit(self):
+    def commit(self) -> Self:
         db.session.commit()
         return self
 

@@ -18,13 +18,16 @@
           {{ signup.email(placeholder='xxx@uwcchina.org...', class='input') }}
         </div>
         <div>
-          {{ signup.password(placeholder='password', class='input') }}
+          {{ signup.username(placeholder='Username', class='input') }}
         </div>
         <div>
-          {{ signup.confirm_password(placeholder='confirm your password', class='input') }}
+          {{ signup.password(placeholder='Password', class='input') }}
         </div>
         <div>
-          {{ signup.submit() }}
+          {{ signup.confirm_password(placeholder='Confirm your password', class='input') }}
+        </div>
+        <div>
+          {{ signup.submit(class='submit', value='Sign Up') }}
         </div>
       </form>
     </div>
@@ -36,10 +39,10 @@
           {{ login.email(placeholder='xxx@uwcchina.org...', class='input') }}
         </div>
         <div>
-          {{ login.password(placeholder='password', class='input') }}
+          {{ login.password(placeholder='Password', class='input') }}
         </div>
         <div>
-          {{ login.submit() }}
+          {{ login.submit(class='submit', value='Login') }}
         </div>
       </form>
     </div>

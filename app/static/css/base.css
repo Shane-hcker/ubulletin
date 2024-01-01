@@ -61,3 +61,11 @@ header {
 .right-tabs {
     float: right !important;
 }
+
+.login-tab {
+    font-size: 14px;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
