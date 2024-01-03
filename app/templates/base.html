@@ -36,6 +36,13 @@
         GIF
       </div>
     </a>
+    {% if current_user.is_authenticated %}
+      <a href="{{ url_for('logout') }}" class="tab right-tabs">
+        <div class="tab-icon">
+          Logout
+        </div>
+      </a>
+    {% endif %}
     <a href="{{ url_for('login') }}" class="tab right-tabs">
       <div class="tab-icon login-tab">
         <img src="../static/images/defaultuser.png" title="{{ current_user.username }}">

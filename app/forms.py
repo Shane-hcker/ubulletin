@@ -2,6 +2,7 @@
 from typing import *
 from functools import wraps
 
+from dns.resolver import NoResolverConfiguration
 import sqlalchemy
 from sqlalchemy import and_
 from werkzeug.security import check_password_hash
@@ -29,8 +30,17 @@ def valid_char(func):
     return wrapper
 
 
+class EmailOffline(Email):
+    def __call__(self, *args, **kwargs):
+        try:
+            return super().__call__(*args, **kwargs)
+        except NoResolverConfiguration:
+            self.check_deliverability = False
+            return super().__call__(*args, **kwargs)
+
+
 class LoginForm(FlaskForm):
-    email = StringField(validators=[DataRequired(), Email(check_deliverability=True)])
+    email = StringField(validators=[DataRequired(), EmailOffline(check_deliverability=True)])
     password = PasswordField(validators=[DataRequired(), Length(min=8)])
     # remember = BooleanField('Remember Me')
     submit = SubmitField()
@@ -41,7 +51,6 @@ class LoginForm(FlaskForm):
             raise ValidationError(f'{email.data} is not a school email.')
 
     def validate_password(self, password: Field):
-        print(self.password.data, self.email.data)
         if not check_password_hash(User.get_user(
            email=self.email.data).password, password.data):
             raise ValidationError(f'Incorrect password for {self.email.data}')
@@ -49,7 +58,7 @@ class LoginForm(FlaskForm):
 
 class SignupForm(FlaskForm):
     username = StringField(validators=[DataRequired(), Length(min=4, max=64)])
-    email = StringField(validators=[DataRequired(), Email(check_deliverability=True)])
+    email = StringField(validators=[DataRequired(), EmailOffline(check_deliverability=True)])
     password = PasswordField(validators=[DataRequired(), Length(min=8)])
     confirm_password = PasswordField(validators=[DataRequired(), Length(min=8)])
     submit = SubmitField()

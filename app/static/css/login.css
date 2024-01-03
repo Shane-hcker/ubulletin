@@ -54,6 +54,16 @@
   padding-left: 10px;
 }
 
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus
+{
+  background-color: rgb(54, 60, 73);
+}
+
 .input:focus {
   outline: none;
   background-color: rgb(40, 40, 40);
