@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from typing import *
 
+from sqlalchemy.orm import backref
 from werkzeug.security import check_password_hash
 from sqlalchemy import select, and_
 from sqlalchemy import Integer, VARCHAR, Text as sText
@@ -20,6 +21,14 @@ def get_user(user_id):
     return User.get(int(user_id))
 
 
+# follower - following
+follow_relation = db.Table(
+    'follow_relation',
+    Column('from_', Integer, ForeignKey('user.id')),
+    Column('to', Integer, ForeignKey('user.id'))
+)
+
+
 class User(UserMixin, DBMixin, db.Model):
     # Columns
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -28,6 +37,35 @@ class User(UserMixin, DBMixin, db.Model):
     password = Column(SaltVarChar(102), nullable=False)
 
     post = db.relationship('Post', backref='user', lazy=True)
+
+    to = db.relationship(
+        'User', secondary=follow_relation, lazy=True,
+        primaryjoin=(follow_relation.c.from_ == id),
+        secondaryjoin=(follow_relation.c.to == id),
+        backref=backref('from_', lazy=True),
+    )
+
+    def follow(self, other: "User") -> Self:
+        if other not in self.to:
+            self.to.append(other)
+            return self
+
+    def unfollow(self, other: "User") -> Self:
+        if other in self.to:
+            self.to.append(other)
+            return self
+
+    def is_following(self, other: "User") -> bool:
+        return other in self.to
+
+    def is_followed_by(self, other: "User") -> bool:
+        return other in self.from_
+
+    def to_len(self) -> int:
+        return len(self.to)
+
+    def from_len(self) -> int:
+        return len(self.from_)
 
     @staticmethod
     def get_user(**kwargs) -> "User":
