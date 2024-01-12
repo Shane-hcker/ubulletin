@@ -87,3 +87,14 @@ textarea:-webkit-autofill:focus
 .signup-form {
   display: none;
 }
+
+.popup {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: fixed;
+  z-index: 0;
+  background-color: #fff;
+/*  todo popup*/
+}

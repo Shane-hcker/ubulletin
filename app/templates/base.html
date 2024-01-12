@@ -64,9 +64,17 @@
       </div>
     </a>
   </header>
+
   {% block content %}{% endblock %}
+
   {% if route == 'login' or route == 'signup' %}
     <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+  {% endif %}
+
+  {% if login and (login.email.errors or login.password.errors) %}
+    <div class="popup">
+      dwdwdw
+    </div>
   {% endif %}
 </body>
 </html>

@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from typing import *
 
+from functools import partial
 from werkzeug.security import generate_password_hash
 from flask import render_template, flash, redirect, url_for
 from flask_login import current_user, login_user, logout_user
@@ -8,6 +9,8 @@ from flask_login import current_user, login_user, logout_user
 from app import app, db
 from app.models import User
 from app.forms import *
+
+render_template = partial(render_template, login=None)
 
 
 @app.route('/')
